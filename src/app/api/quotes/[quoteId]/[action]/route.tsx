@@ -19,13 +19,13 @@ export async function PUT(
       return NextResponse.json({ message: "Invalid action" }, { status: 400 });
     }
 
-    const quoteToAction = await prisma.quote.findUnique({
+    const quoteToDoAction = await prisma.quote.findUnique({
       where: {
         id: Number(quoteId),
       },
     });
 
-    if (!quoteToAction) {
+    if (!quoteToDoAction) {
       return NextResponse.json({ message: "Quote not found" }, { status: 404 });
     }
 
