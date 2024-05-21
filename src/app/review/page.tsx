@@ -54,7 +54,7 @@ export default function Home() {
       key: "x",
       render: (_: any, record: any) => {
         return (
-          <Space size="middle">
+          <Space size="middle" className="w-full">
             <a
               onClick={() => {
                 handleApproveReject(record.id, "approve");
@@ -74,5 +74,10 @@ export default function Home() {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} rowKey={"id"} />;
+  return (
+    <div className="w-full">
+      <h2 className="mb-4 text-2xl font-bold">Approve Quote</h2>
+      <Table columns={columns} dataSource={data} rowKey={"id"} />
+    </div>
+  );
 }

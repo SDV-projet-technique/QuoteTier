@@ -40,6 +40,14 @@ export async function PUT(
       });
     }
 
+    if (action === "reject") {
+      await prisma.quote.delete({
+        where: {
+          id: Number(quoteId),
+        },
+      });
+    }
+
     if (action === "like") {
       await prisma.quote.update({
         where: {

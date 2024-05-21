@@ -2,7 +2,7 @@
 import { Author } from "@/lib/types";
 import type { FormProps } from "antd";
 import { Button, Form, Input, Select, Spin } from "antd";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const { TextArea } = Input;
 type FieldType = {
@@ -56,41 +56,43 @@ export default function AddQuote() {
   }
 
   return (
-    <Form
-      name="basic"
-      labelCol={{ span: 8 }}
-      className="mx-auto my-auto w-5/6"
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
-      <Form.Item<FieldType>
-        label="Quote"
-        name="text"
-        rules={[{ required: true, message: "Please input your password!" }]}
+    <div className="w-full">
+      <h2 className="mb-5 text-2xl font-bold">Add Quote</h2>
+      <Form
+        name="basic"
+        className="w-full"
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
       >
-        <TextArea />
-      </Form.Item>
+        <Form.Item<FieldType>
+          label="Text"
+          name="text"
+          rules={[{ required: true, message: "Please input a quote!" }]}
+        >
+          <TextArea />
+        </Form.Item>
 
-      <Form.Item<FieldType>
-        label="Author"
-        name="authorId"
-        rules={[{ required: true, message: "Please input an author!" }]}
-      >
-        <Select
-          placeholder="Select a person"
-          optionFilterProp="children"
-          onChange={onChange}
-          options={authors}
-        />
-      </Form.Item>
+        <Form.Item<FieldType>
+          label="Author"
+          name="authorId"
+          rules={[{ required: true, message: "Please chose an author!" }]}
+        >
+          <Select
+            placeholder="Select a person"
+            optionFilterProp="children"
+            onChange={onChange}
+            options={authors}
+          />
+        </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 }

@@ -2,11 +2,11 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { ConfigProvider } from "antd";
 import type { Metadata } from "next";
-import { Dancing_Script } from "next/font/google";
+import { Caudex } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
 
-const dancingScript = Dancing_Script({ subsets: ["latin"] });
+const font = Caudex({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Quote tier",
@@ -25,16 +25,16 @@ export default function RootLayout({
     <ConfigProvider
       theme={{
         token: {
-          fontFamily: dancingScript.style.fontFamily,
+          fontFamily: font.style.fontFamily,
         },
       }}
     >
       <html lang="en">
-        <body
-          className={`${dancingScript.className} flex min-h-screen flex-col`}
-        >
+        <body className={`${font.className} flex min-h-screen flex-col`}>
           <Header />
-          {children}
+          <main className="mx-auto flex w-2/3 flex-1 justify-center">
+            {children}
+          </main>
           <Footer />
         </body>
       </html>
