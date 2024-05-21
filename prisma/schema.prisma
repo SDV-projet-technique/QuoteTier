@@ -24,6 +24,8 @@ model Quote {
   id       Int     @id @default(autoincrement())
   text     String
   approved Boolean @default(false)
+  likes    Int     @default(0)
+  dislikes Int     @default(0)
   authorId Int     @map("author_id")
 
   author Author @relation(fields: [authorId], references: [id])
