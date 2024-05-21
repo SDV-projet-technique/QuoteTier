@@ -1,9 +1,10 @@
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import { ConfigProvider } from "antd";
 import type { Metadata } from "next";
 import { Dancing_Script } from "next/font/google";
-import "./globals.css";
 import { ReactNode } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import "./globals.css";
 
 const dancingScript = Dancing_Script({ subsets: ["latin"] });
 
@@ -21,12 +22,22 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${dancingScript.className} flex min-h-screen flex-col`}>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ConfigProvider
+      theme={{
+        token: {
+          fontFamily: dancingScript.style.fontFamily,
+        },
+      }}
+    >
+      <html lang="en">
+        <body
+          className={`${dancingScript.className} flex min-h-screen flex-col`}
+        >
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ConfigProvider>
   );
 }
