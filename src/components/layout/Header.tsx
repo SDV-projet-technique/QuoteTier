@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -28,7 +28,7 @@ export default function Header() {
           </li>
           <li>
             <a href="/review" className="hover:underline">
-              Approve Author
+              Approve Quote
             </a>
           </li>
         </ul>
