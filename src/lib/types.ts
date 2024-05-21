@@ -1,7 +1,7 @@
 export interface Author {
   id: number;
   name: string;
-  quotes?: Quote[] | null;
+  quotes?: Quote[];
 }
 
 export interface Quote {
@@ -10,6 +10,6 @@ export interface Quote {
   approved: boolean;
   likes: number;
   dislikes: number;
-  authorId: string | number;
+  authorId: number;
   author?: Author;
 }
