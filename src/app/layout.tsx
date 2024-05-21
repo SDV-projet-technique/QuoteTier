@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
+import Header from "@/components/layout/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const dancingScript = Dancing_Script({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Quote tier",
   description: "A quote tier",
+  icons: {
+    icon: "/images/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -17,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${dancingScript.className} flex min-h-screen flex-col`}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
