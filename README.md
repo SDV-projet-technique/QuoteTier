@@ -15,6 +15,6 @@
 ## Niveau 3 (12 pts)
 
 - [x] Création d’une API pour gérer les citations
-- [x] Système de like/dislike d’une citation
+- [ ] Système de like/dislike d’une citation **_(crash coté front, back fonctionnel)_**
 - [ ] Trie des citations par popularité **_(voir avec Dylan si Ant le gère)_**
 - [ ] Mise en place de tests
