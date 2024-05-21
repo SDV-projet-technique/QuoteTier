@@ -1,15 +1,15 @@
 export interface Author {
-  id: string;
+  id: number;
   name: string;
-  quotes: Quote[];
+  quotes?: Quote[] | null;
 }
 
 export interface Quote {
-  id: string;
+  id: number;
   text: string;
   approved: boolean;
   likes: number;
   dislikes: number;
   authorId: string | number;
-  author: Author;
+  author?: Author;
 }
