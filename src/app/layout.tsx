@@ -3,6 +3,7 @@ import { Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const dancingScript = Dancing_Script({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={`${dancingScript.className} flex min-h-screen flex-col`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
