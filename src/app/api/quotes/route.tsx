@@ -10,6 +10,9 @@ export async function GET(): Promise<NextResponse> {
       include: {
         author: true,
       },
+      where: {
+        approved: true,
+      },
     });
     return NextResponse.json(quotes, { status: 200 });
   } catch (error) {
