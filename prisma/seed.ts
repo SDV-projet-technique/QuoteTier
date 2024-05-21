@@ -3,6 +3,10 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+  /////////////////////////////////// Truncate all tables ////////////////////////////////////
+  await prisma.quote.deleteMany();
+  await prisma.author.deleteMany();
+
   ////////////////////////////////////// Create authors //////////////////////////////////////
   const albert = await prisma.author.create({
     data: {
