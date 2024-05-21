@@ -2,7 +2,7 @@
 import { Author } from "@/lib/types";
 import type { FormProps } from "antd";
 import { Button, Form, Input, Select, Spin } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const { TextArea } = Input;
 type FieldType = {

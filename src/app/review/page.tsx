@@ -1,11 +1,11 @@
 "use client";
 import type { Quote } from "@/lib/types";
 import { Popconfirm, Space, Spin, Table } from "antd";
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [data, setData] = React.useState<Quote[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [data, setData] = useState<Quote[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/quotes/not-approved")

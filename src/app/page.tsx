@@ -2,28 +2,28 @@
 import type { Quote } from "@/lib/types";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 import { Avatar, List, message, Space, Spin } from "antd";
-import React, { useEffect } from "react";
+import { createElement, FC, useEffect, useState } from "react";
 
 function IconText({
   icon,
   text,
   onClick,
 }: {
-  icon: React.FC;
+  icon: FC;
   text: string;
   onClick: () => void;
 }) {
   return (
     <Space onClick={onClick} className="cursor-pointer">
-      {React.createElement(icon)}
+      {createElement(icon)}
       {text}
     </Space>
   );
 }
 
 export default function Home() {
-  const [data, setData] = React.useState<Quote[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [data, setData] = useState<Quote[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/quotes")
