@@ -4,10 +4,12 @@ const prisma = new PrismaClient();
 
 async function main() {
   /////////////////////////////////// Truncate all tables ////////////////////////////////////
+  console.log("Truncating all tables");
   await prisma.quote.deleteMany();
   await prisma.author.deleteMany();
 
   ////////////////////////////////////// Create authors //////////////////////////////////////
+  console.log("Creating authors");
   const albert = await prisma.author.create({
     data: {
       name: "Albert Einstein",
@@ -64,8 +66,10 @@ async function main() {
     },
   });
 
+  console.log("Authors created");
   ////////////////////////////////////// Create quotes //////////////////////////////////////
-  //------------------ Faked ------------------//
+  console.log("Creating quotes");
+
   await prisma.quote.create({
     data: {
       text: "Pee is stored in the balls.",
@@ -151,6 +155,8 @@ async function main() {
       authorId: emir.id,
     },
   });
+
+  console.log("Quotes created");
 }
 
 main()
