@@ -1,8 +1,8 @@
 "use client";
 import type { Quote } from "@/lib/types";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
-import { Avatar, List, message, Space, Spin } from "antd";
-import { createElement, FC, useEffect, useState } from "react";
+import { App, Avatar, List, Select, Space, Spin } from "antd";
+import { FC, createElement, useEffect, useState } from "react";
 
 function IconText({
   icon,
@@ -23,13 +23,16 @@ function IconText({
 
 export default function Home() {
   const [data, setData] = useState<Quote[]>([]);
+  const [dataRecent, setDataRecent] = useState<Quote[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { message } = App.useApp();
 
   useEffect(() => {
     fetch("/api/quotes")
       .then((res) => res.json())
       .then((data) => {
         setData(data);
+        setDataRecent(data);
         setIsLoading(false);
       });
   }, []);
@@ -44,11 +47,7 @@ export default function Home() {
 
   const handleLikeDislike = (quote: Quote, action: "like" | "dislike") => {
     try {
-      fetch(`/api/quotes/${quote.id}/${action}`, { method: "PUT" })
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data);
-        });
+      fetch(`/api/quotes/${quote.id}/${action}`, { method: "PUT" });
       message.success("Thank you for your feedback!");
       setData((prevData) => {
         return prevData.map((oldQuote) => {
@@ -69,47 +68,75 @@ export default function Home() {
   };
 
   return (
-    <List
-      itemLayout="vertical"
-      className="w-full"
-      size="large"
-      pagination={{
-        onChange: (page) => {
-          console.log(page);
-        },
-        pageSize: 4,
-      }}
-      header={<h2 className="text-2xl font-bold">Quotes</h2>}
-      dataSource={data}
-      renderItem={(item) => (
-        <List.Item
-          key={item.text}
-          actions={[
-            <IconText
-              icon={LikeOutlined}
-              text={item.likes.toString()}
-              key="list-vertical-like-o"
-              onClick={() => handleLikeDislike(item, "like")}
-            />,
-            <IconText
-              icon={DislikeOutlined}
-              text={item.dislikes.toString()}
-              key="list-vertical-dislike"
-              onClick={() => handleLikeDislike(item, "dislike")}
-            />,
-          ]}
+    <Space direction="vertical" className="w-full">
+      <Space>
+        <p>Order by: </p>
+        <Select
+          defaultValue={"recent"}
+          style={{ width: 200 }}
+          placeholder="Order by"
+          onChange={(value) => {
+            setData((prevData) => {
+              switch (value) {
+                case "recent":
+                  return dataRecent;
+                case "likes":
+                  return [...prevData].sort((a, b) => b.likes - a.likes);
+                case "dislikes":
+                  return [...prevData].sort((a, b) => b.dislikes - a.dislikes);
+                default:
+                  return prevData;
+              }
+            });
+          }}
         >
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${item.id}`}
-              />
-            }
-            title={<a href={item.text}>{item.text}</a>}
-            description={item?.author?.name || "Unknown"}
-          />
-        </List.Item>
-      )}
-    />
+          <Select.Option value="recent">Recent</Select.Option>
+          <Select.Option value="likes">Likes</Select.Option>
+          <Select.Option value="dislikes">Dislikes</Select.Option>
+        </Select>
+      </Space>
+      <List
+        itemLayout="vertical"
+        className="w-full"
+        size="large"
+        pagination={{
+          onChange: (page) => {
+            console.log(page);
+          },
+          pageSize: 4,
+        }}
+        header={<h2 className="text-2xl font-bold">Quotes</h2>}
+        dataSource={data}
+        renderItem={(item) => (
+          <List.Item
+            key={item.text}
+            actions={[
+              <IconText
+                icon={LikeOutlined}
+                text={item.likes.toString()}
+                key="list-vertical-like-o"
+                onClick={() => handleLikeDislike(item, "like")}
+              />,
+              <IconText
+                icon={DislikeOutlined}
+                text={item.dislikes.toString()}
+                key="list-vertical-dislike"
+                onClick={() => handleLikeDislike(item, "dislike")}
+              />,
+            ]}
+          >
+            <List.Item.Meta
+              avatar={
+                <Avatar
+                  src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${item.id}`}
+                />
+              }
+              title={<p>{item.text}</p>}
+              description={item?.author?.name || "Unknown"}
+            />
+          </List.Item>
+        )}
+      />
+    </Space>
   );
 }

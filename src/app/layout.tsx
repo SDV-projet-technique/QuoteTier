@@ -1,6 +1,6 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
-import { ConfigProvider } from "antd";
+import { App, ConfigProvider } from "antd";
 import type { Metadata } from "next";
 import { Caudex } from "next/font/google";
 import { ReactNode } from "react";
@@ -31,11 +31,13 @@ export default function RootLayout({
     >
       <html lang="en">
         <body className={`${font.className} flex min-h-screen flex-col`}>
-          <Header />
-          <main className="mx-auto flex w-2/3 flex-1 justify-center">
-            {children}
-          </main>
-          <Footer />
+          <App>
+            <Header />
+            <main className="mx-auto flex w-2/3 flex-1 justify-center">
+              {children}
+            </main>
+            <Footer />
+          </App>
         </body>
       </html>
     </ConfigProvider>
