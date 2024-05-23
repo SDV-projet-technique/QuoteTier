@@ -64,7 +64,7 @@ export default function Home() {
   const { message } = App.useApp();
 
   useEffect(() => {
-    fetch("/api/quotes/not-approved")
+    fetch("http://localhost:3000/api/quotes/not-approved")
       .then((res) => res.json())
       .then((data) => {
         setData(data);

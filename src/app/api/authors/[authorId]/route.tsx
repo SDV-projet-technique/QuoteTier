@@ -6,10 +6,7 @@ type Params = {
   authorId: number;
 };
 
-export async function GET(
-  request: NextRequest,
-  context: { params: Params },
-): Promise<NextResponse> {
+export async function GET(context: { params: Params }): Promise<NextResponse> {
   try {
     const { authorId } = context.params;
 

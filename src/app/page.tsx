@@ -28,7 +28,7 @@ export default function Home() {
   const { message } = App.useApp();
 
   useEffect(() => {
-    fetch("/api/quotes")
+    fetch("http://localhost:3000/api/quotes")
       .then((res) => res.json())
       .then((data) => {
         setData(data);

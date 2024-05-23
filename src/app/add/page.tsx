@@ -12,7 +12,7 @@ type FieldType = {
 
 const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
   console.log("Success:", values);
-  fetch("/api/quotes", {
+  fetch("http://localhost:3000/api/quotes", {
     method: "POST",
     body: JSON.stringify(values),
   })
@@ -33,7 +33,7 @@ export default function AddQuote() {
   );
 
   useEffect(() => {
-    fetch("/api/authors")
+    fetch("http://localhost:3000/api/authors")
       .then((res) => res.json())
       .then((data) => {
         console.log("data", data);
