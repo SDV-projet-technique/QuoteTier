@@ -30,8 +30,8 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={`${font.className} flex min-h-screen flex-col`}>
-          <App>
+        <body className={font.className}>
+          <App className="flex min-h-screen flex-col">
             <Header />
             <main className="mx-auto flex w-2/3 flex-1 justify-center">
               {children}
