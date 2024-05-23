@@ -2,7 +2,7 @@
 import type { Quote } from "@/lib/types";
 import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
 import { App, Avatar, List, Select, Space, Spin } from "antd";
-import { FC, createElement, useEffect, useState } from "react";
+import { createElement, FC, useEffect, useState } from "react";
 
 function IconText({
   icon,
@@ -131,7 +131,7 @@ export default function Home() {
                   src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${item.id}`}
                 />
               }
-              title={<p>{item.text}</p>}
+              title={<p className="italic">"{item.text}"</p>}
               description={item?.author?.name || "Unknown"}
             />
           </List.Item>
