@@ -1,12 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
 import { Quote } from "@/lib/types";
 import prisma from "@/services/prisma";
+import { NextRequest, NextResponse } from "next/server";
 
 type Params = {
   quoteId: number;
 };
 
-export async function GET(context: { params: Params }): Promise<NextResponse> {
+export async function GET(
+  request: NextRequest,
+  context: { params: Params },
+): Promise<NextResponse> {
   try {
     const { quoteId } = context.params;
 
@@ -76,9 +79,10 @@ export async function PUT(
   }
 }
 
-export async function DELETE(context: {
-  params: Params;
-}): Promise<NextResponse> {
+export async function DELETE(
+  request: NextRequest,
+  context: { params: Params },
+): Promise<NextResponse> {
   try {
     const { quoteId } = context.params;
 
