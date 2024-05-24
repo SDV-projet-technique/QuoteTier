@@ -17,4 +17,4 @@
 - [x] Création d’une API pour gérer les citations
 - [x] Système de like/dislike d’une citation
 - [x] Trie des citations par popularité
-- [ ] Mise en place de tests
+- [x] Mise en place de tests
